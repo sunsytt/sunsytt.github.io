@@ -1,0 +1,68 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Hero from '@components/Hero.astro';
+import TechList from '@components/TechList.astro';
+import ArticleCard from '@components/ArticleCard.astro';
+import ProjectCard from '@components/ProjectCard.astro';
+import CTA from '@components/CTA.astro';
+import { getCollection } from 'astro:content';
+
+// Traemos los 3 artículos más recientes que no sean borradores.
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+// Proyectos destacados en la home (versión resumida; la lista completa
+// vive en /proyectos). Ajusta imagen y repoUrl cuando tengas los reales.
+const featuredProjects = [
+  {
+    title: 'Funlish',
+    description: 'Plataforma gamificada para aprender inglés — mi proyecto integrador, en equipo de 4.',
+    image: '/images/funlish.png',
+    technologies: ['React', 'Tailwind CSS', 'Javalin', 'MySQL'],
+    role: 'Desarrollo del frontend de estudiante y preparación de la defensa técnica',
+    learnings: 'Coordinar frontend y backend en un proyecto real de equipo',
+  },
+  {
+    title: 'Buscador de novelas (Android)',
+    description: 'App personal para aprender Android desde cero, buscando novelas con Retrofit.',
+    image: '/images/appNovela.jpg',
+    technologies: ['Kotlin', 'Retrofit'],
+    role: 'Proyecto individual fuera de Funlish',
+    learnings: 'Fundamentos de Kotlin y consumo de APIs con Retrofit',
+  },
+];
+---
+
+<BaseLayout
+  title="Inicio"
+  description="Frontend Diary: apuntes de desarrollo Frontend, SEO técnico y proyectos reales, incluyendo Funlish."
+>
+  <Hero />
+  <TechList />
+
+  <section class="border-t border-border py-14">
+    <div class="flex items-baseline justify-between">
+      <h2 class="text-2xl font-semibold">Artículos recientes</h2>
+      <a href="/blog" class="text-sm underline underline-offset-4 decoration-border hover:decoration-accent">Ver todos</a>
+    </div>
+    {
+      posts.length > 0 ? (
+        <div class="mt-6 grid gap-5 md:grid-cols-3">
+          {posts.map((post) => <ArticleCard post={post} />)}
+        </div>
+      ) : (
+        <p class="mt-4 text-sm text-text-secondary">Aún no hay artículos publicados.</p>
+      )
+    }
+  </section>
+
+  <section class="border-t border-border py-14">
+    <h2 class="text-2xl font-semibold">Proyectos destacados</h2>
+    <div class="mt-6 grid gap-6 md:grid-cols-2">
+      {featuredProjects.map((project) => <ProjectCard {...project} />)}
+    </div>
+  </section>
+
+  <CTA />
+</BaseLayout>

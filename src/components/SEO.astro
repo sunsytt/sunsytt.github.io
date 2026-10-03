@@ -1,0 +1,82 @@
+---
+// SEO.astro
+// Centraliza todas las meta etiquetas del <head>. Cada página del sitio
+// debe usar este componente pasándole title/description propios, en vez
+// de escribir meta tags sueltas en cada archivo: así garantizamos que
+// ninguna página se publique sin SEO básico.
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  type?: 'website' | 'article';
+  publishedDate?: Date;
+  tags?: string[];
+}
+
+const {
+  title,
+  description,
+  image = '/images/og-default.jpg',
+  type = 'website',
+  publishedDate,
+  tags = [],
+} = Astro.props;
+
+const siteName = 'Frontend Diary';
+const fullTitle = `${title} | ${siteName}`;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const absoluteImageURL = new URL(image, Astro.site);
+
+// JSON-LD: usamos BlogPosting para artículos y WebSite para el resto,
+// como pide el brief para que Google entienda el tipo de contenido.
+const jsonLd =
+  type === 'article'
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline: title,
+        description,
+        image: absoluteImageURL.toString(),
+        datePublished: publishedDate?.toISOString(),
+        keywords: tags.join(', '),
+        author: {
+          '@type': 'Person',
+          name: 'Siyu',
+        },
+      }
+    : {
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        name: siteName,
+        url: Astro.site?.toString(),
+        author: {
+          '@type': 'Person',
+          name: 'Siyu',
+        },
+      };
+---
+
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<meta name="author" content="Siyu" />
+<link rel="canonical" href={canonicalURL} />
+
+{tags.length > 0 && <meta name="keywords" content={tags.join(', ')} />}
+
+<!-- Open Graph -->
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={absoluteImageURL} />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:type" content={type} />
+<meta property="og:site_name" content={siteName} />
+
+<!-- Twitter Cards -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={absoluteImageURL} />
+
+<!-- Schema.org JSON-LD -->
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

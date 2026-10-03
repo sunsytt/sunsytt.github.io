@@ -1,0 +1,83 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Contacto"
+  description="Ponte en contacto con Katia, autora de Frontend Diary."
+>
+  <h1 class="text-3xl font-bold">Contacto</h1>
+  <p class="mt-2 max-w-prose text-text-secondary">
+    Este formulario es solo visual por ahora (sin backend). Si quieres escribirme de verdad, usa
+    alguno de los enlaces de abajo.
+  </p>
+
+  <div class="mt-10 grid gap-10 md:grid-cols-2">
+    <form class="space-y-5">
+      <div>
+        <label for="name" class="text-sm text-text-secondary">Nombre</label>
+        <input
+          id="name"
+          name="name"
+          type="text"
+          class="mt-1 w-full rounded-md border border-border bg-surface px-3 py-2 text-sm text-text-primary focus:border-accent"
+          placeholder="Tu nombre"
+        />
+      </div>
+      <div>
+        <label for="email" class="text-sm text-text-secondary">Correo</label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          class="mt-1 w-full rounded-md border border-border bg-surface px-3 py-2 text-sm text-text-primary focus:border-accent"
+          placeholder="tu@correo.com"
+        />
+      </div>
+      <div>
+        <label for="message" class="text-sm text-text-secondary">Mensaje</label>
+        <textarea
+          id="message"
+          name="message"
+          rows="5"
+          class="mt-1 w-full rounded-md border border-border bg-surface px-3 py-2 text-sm text-text-primary focus:border-accent"
+          placeholder="Escribe tu mensaje aquí"
+        ></textarea>
+      </div>
+      <button
+        type="button"
+        disabled
+        class="rounded-md border border-border px-4 py-2 text-sm text-text-secondary"
+        title="Formulario visual, aún sin backend conectado"
+      >
+        Enviar mensaje
+      </button>
+    </form>
+
+    <div class="space-y-4 text-sm">
+      <p class="text-text-secondary">O escríbeme directamente por:</p>
+      <a
+        href="https://github.com/sunsytt"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="block rounded-md border border-border px-4 py-3 no-underline text-text-primary hover:border-accent"
+      >
+        GitHub
+      </a>
+      <a
+        href="www.linkedin.com/in/katia-luis-sanchez-8448ba436"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="block rounded-md border border-border px-4 py-3 no-underline text-text-primary hover:border-accent"
+      >
+        LinkedIn
+      </a>
+      <a
+        href="mailto:katialuisanchez.49@gmail.com"
+        class="block rounded-md border border-border px-4 py-3 no-underline text-text-primary hover:border-accent"
+      >
+        Email
+      </a>
+    </div>
+  </div>
+</BaseLayout>

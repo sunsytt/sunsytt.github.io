@@ -1,0 +1,23 @@
+---
+// TechList.astro
+const daily = ['Astro', 'Tailwind CSS', 'TypeScript', 'Java'];
+const learning = ['Kotlin', 'Android SDK', 'Retrofit'];
+---
+
+<section class="border-t border-border py-14">
+  <h2 class="text-2xl font-semibold">Con qué trabajo</h2>
+  <div class="mt-6 grid gap-8 text-sm md:grid-cols-2">
+    <div>
+      <p class="text-text-secondary">A diario</p>
+      <ul class="mt-2 space-y-1">
+        {daily.map((tech) => <li class="text-text-primary">{tech}</li>)}
+      </ul>
+    </div>
+    <div>
+      <p class="text-text-secondary">Aprendiendo ahora</p>
+      <ul class="mt-2 space-y-1">
+        {learning.map((tech) => <li class="text-text-primary">{tech}</li>)}
+      </ul>
+    </div>
+  </div>
+</section>

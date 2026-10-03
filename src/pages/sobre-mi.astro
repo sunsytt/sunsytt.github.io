@@ -1,0 +1,72 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+
+// Es una secuencia cronológica real, por eso sí tiene sentido usar
+// marcadores de orden aquí (a diferencia de una sección de features).
+const timeline = [
+  {
+    date: '2024',
+    title: 'Estructura de Datos',
+    description: 'Prácticas con arreglos en Java partiendo de diagramas de clases UML.',
+  },
+  {
+    date: '2025–2026',
+    title: 'Funlish',
+    description:
+      'Desarrollo del frontend de estudiante en equipo de cuatro: motor de juego, timers, progreso y panel de perfil.',
+  },
+  {
+    date: '2026',
+    title: 'Android desde cero',
+    description: 'Aprendiendo Kotlin y Retrofit construyendo una app buscadora de novelas por mi cuenta.',
+  },
+  {
+    date: '2026',
+    title: 'Frontend Diary',
+    description: 'Este sitio: Astro, Tailwind y SEO técnico, documentando lo que voy aprendiendo.',
+  },
+];
+
+const learningNow = ['Kotlin', 'Android SDK', 'Retrofit'];
+---
+
+<BaseLayout
+  title="Sobre mí"
+  description="Siyu, estudiante de la UPChiapas especializada en desarrollo Frontend, autora de Frontend Diary."
+>
+  <h1 class="text-3xl font-bold">Sobre mí</h1>
+
+  <div class="mt-6 max-w-prose text-text-secondary">
+    <p>
+      Soy Katia, estudiante de la Universidad Politécnica de Chiapas. Me especializo en desarrollo
+      Frontend y estoy construyendo Funlish, mi proyecto integrador: una plataforma gamificada para
+      reforzar inglés a nivel universitario, junto a un equipo de cuatro personas.
+    </p>
+    <p class="mt-4">
+      Frontend Diary es donde documento lo que aprendo en el camino — desde el trabajo diario en
+      Funlish hasta experimentos por mi cuenta, como aprender desarrollo Android desde cero.
+    </p>
+  </div>
+
+  <section class="mt-12">
+    <h2 class="text-xl font-semibold">Línea de tiempo</h2>
+    <ol class="mt-6 space-y-6 border-l border-border pl-6">
+      {
+        timeline.map((item) => (
+          <li>
+            <p class="text-xs text-text-secondary">{item.date}</p>
+            <p class="mt-1 font-medium text-text-primary">{item.title}</p>
+            <p class="mt-1 text-sm text-text-secondary">{item.description}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <section class="mt-12 border-t border-border pt-10">
+    <h2 class="text-xl font-semibold">Aprendiendo ahora</h2>
+    <ul class="mt-4 flex flex-wrap gap-2 text-sm">
+      {learningNow.map((tech) => <li class="rounded border border-border px-3 py-1 text-text-secondary">{tech}</li>)}
+    </ul>
+  </section>
+</BaseLayout>

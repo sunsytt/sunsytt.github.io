@@ -1,0 +1,40 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import ProjectCard from '@components/ProjectCard.astro';
+
+// El proyecto principal es Funlish, como pide el brief. Ajusta la imagen
+// y el repoUrl cuando los tengas.
+const projects = [
+  {
+    title: 'Funlish',
+    description:
+      'Plataforma gamificada para el reforzamiento de inglés a nivel universitario, desarrollada como proyecto integrador en equipo de cuatro personas.',
+    image: '/images/funlish.png',
+    technologies: ['React', 'Vite', 'Tailwind CSS', 'Axios', 'React Router', 'Javalin', 'MySQL'],
+    role: 'Desarrollo del frontend del estudiante: motor de juego para actividades tipo trivia y scramble, timers, progreso en localStorage y panel de perfil con gráficas de desempeño.',
+    learnings:
+      'Integrar frontend y backend en un proyecto real de equipo, diagnosticar bugs de integración (estado no derivado de la URL, módulos parcialmente simulados) y preparar la defensa técnica a partir del código real.',
+  },
+  {
+    title: 'Buscador de novelas (Android)',
+    description:
+      'Proyecto personal para aprender Android y Kotlin desde cero, construyendo una app que busca y muestra información de novelas.',
+    image: '/images/appNovela.jpg',
+    technologies: ['Kotlin', 'Android SDK', 'Retrofit'],
+    role: 'Proyecto individual, fuera de Funlish, para aprender desarrollo Android desde cero.',
+    learnings: 'Fundamentos de Kotlin, consumo de APIs con Retrofit y el ciclo de vida de una app Android.',
+  },
+];
+---
+
+<BaseLayout
+  title="Proyectos"
+  description="Proyectos : Funlish, plataforma gamificada de inglés, y una app Android para buscar novelas."
+>
+  <h1 class="text-3xl font-bold">Proyectos</h1>
+  <p class="mt-2 text-text-secondary">Lo que he construido, con el rol que jugué y lo que aprendí en cada uno.</p>
+
+  <div class="mt-8 grid gap-6 md:grid-cols-2">
+    {projects.map((project) => <ProjectCard {...project} />)}
+  </div>
+</BaseLayout>

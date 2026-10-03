@@ -1,0 +1,50 @@
+---
+// ProjectCard.astro
+interface Props {
+  title: string;
+  description: string;
+  image: string;
+  technologies: string[];
+  role: string;
+  learnings: string;
+  repoUrl?: string;
+}
+
+const { title, description, image, technologies, role, learnings, repoUrl } = Astro.props;
+---
+
+<article class="rounded-lg border border-border p-6">
+  <img src={image} alt={title} width="640" height="320" loading="lazy" class="mb-5 aspect-[2/1] w-full rounded-md object-cover" />
+
+  <h3 class="text-xl font-semibold">{title}</h3>
+  <p class="mt-2 text-sm text-text-secondary">{description}</p>
+
+  <dl class="mt-5 space-y-3 text-sm">
+    <div>
+      <dt class="text-text-secondary">Mi rol</dt>
+      <dd class="mt-0.5 text-text-primary">{role}</dd>
+    </div>
+    <div>
+      <dt class="text-text-secondary">Qué aprendí</dt>
+      <dd class="mt-0.5 text-text-primary">{learnings}</dd>
+    </div>
+    <div>
+      <dt class="text-text-secondary">Tecnologías</dt>
+      <dd class="mt-1 flex flex-wrap gap-2">
+        {
+          technologies.map((tech) => (
+            <span class="rounded border border-border px-2 py-0.5 text-xs text-text-secondary">{tech}</span>
+          ))
+        }
+      </dd>
+    </div>
+  </dl>
+
+  {
+    repoUrl && (
+      <a href={repoUrl} target="_blank" rel="noopener noreferrer" class="mt-5 inline-block text-sm underline underline-offset-4 decoration-border hover:decoration-accent">
+        Ver repositorio
+      </a>
+    )
+  }
+</article>

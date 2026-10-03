@@ -1,0 +1,92 @@
+---
+// BlogLayout.astro
+// Envuelve BaseLayout añadiendo lo específico de un artículo: encabezado
+// con metadatos, índice automático generado desde los headings del
+// Markdown, navegación anterior/siguiente y etiquetas al final.
+
+import BaseLayout from './BaseLayout.astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+  headings: Heading[];
+  prevPost?: CollectionEntry<'blog'>;
+  nextPost?: CollectionEntry<'blog'>;
+}
+
+const { post, headings, prevPost, nextPost } = Astro.props;
+const { title, description, pubDate, updatedDate, category, tags } = post.data;
+
+// Solo mostramos en el índice los h2/h3 para no saturarlo con h1.
+const tocHeadings = headings.filter((h) => h.depth === 2 || h.depth === 3);
+
+const formattedDate = pubDate.toLocaleDateString('es-MX', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+});
+---
+
+<BaseLayout title={title} description={description} type="article" publishedDate={pubDate} tags={tags}>
+  <article class="mx-auto max-w-prose py-10">
+    <p class="text-xs text-text-secondary">
+      {category} · {formattedDate}
+      {updatedDate && ` (actualizado el ${updatedDate.toLocaleDateString('es-MX')})`}
+    </p>
+    <h1 class="mt-2 text-3xl font-bold md:text-4xl">{title}</h1>
+
+    {
+      tocHeadings.length > 1 && (
+        <nav aria-label="Índice del artículo" class="mt-6 rounded-lg border border-border p-4 text-sm">
+          <p class="text-text-secondary">En este artículo</p>
+          <ul class="mt-2 space-y-1">
+            {tocHeadings.map((h) => (
+              <li style={{ paddingLeft: h.depth === 3 ? '1rem' : '0' }}>
+                <a href={`#${h.slug}`} class="text-text-secondary hover:text-accent">
+                  {h.text}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )
+    }
+
+    <div class="prose mt-8 max-w-none">
+      <slot />
+    </div>
+
+    {
+      tags.length > 0 && (
+        <ul class="mt-10 flex flex-wrap gap-2 text-xs">
+          {tags.map((tag) => (
+            <li class="rounded border border-border px-2 py-1 text-text-secondary">#{tag}</li>
+          ))}
+        </ul>
+      )
+    }
+
+    <nav class="mt-12 flex justify-between border-t border-border pt-6 text-sm" aria-label="Navegación entre artículos">
+      {
+        prevPost ? (
+          <a href={`/blog/${prevPost.slug}`} class="underline underline-offset-4 decoration-border hover:decoration-accent">
+            ← {prevPost.data.title}
+          </a>
+        ) : <span />
+      }
+      {
+        nextPost && (
+          <a href={`/blog/${nextPost.slug}`} class="text-right underline underline-offset-4 decoration-border hover:decoration-accent">
+            {nextPost.data.title} →
+          </a>
+        )
+      }
+    </nav>
+  </article>
+</BaseLayout>

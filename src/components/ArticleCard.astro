@@ -1,0 +1,46 @@
+---
+// ArticleCard.astro
+// Tarjeta plana con borde, sin sombra ni radio decorativo excesivo:
+// evita el "SaaS card kit" (mismo shadow gris en todo). El borde cambia
+// de color en hover para dar feedback sin depender de una sombra.
+
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const { title, description, pubDate, category, heroImage } = post.data;
+
+const readingTime = Math.max(1, Math.round(post.body.split(/\s+/).length / 200));
+
+const formattedDate = pubDate.toLocaleDateString('es-MX', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+});
+---
+
+<a
+  href={`/blog/${post.slug}`}
+  class="group block rounded-lg border border-border p-5 no-underline transition-colors hover:border-accent"
+>
+  {
+    heroImage && (
+      <Image
+        src={heroImage}
+        alt={title}
+        width={480}
+        height={240}
+        class="mb-4 aspect-[2/1] w-full rounded-md object-cover"
+      />
+    )
+  }
+  <p class="text-xs text-text-secondary">{category} · {formattedDate} · {readingTime} min de lectura</p>
+  <h3 class="mt-2 text-lg font-semibold text-text-primary group-hover:text-accent">
+    {title}
+  </h3>
+  <p class="mt-2 text-sm text-text-secondary">{description}</p>
+</a>

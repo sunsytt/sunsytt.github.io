@@ -1,0 +1,28 @@
+---
+// Footer.astro
+// Ajusta estos tres enlaces con tus perfiles reales antes de desplegar.
+const socials = [
+  { label: 'GitHub', href: 'https://github.com/sunsytt' },
+  { label: 'LinkedIn', href: 'www.linkedin.com/in/katia-luis-sanchez-8448ba436' },
+  { label: 'Email', href: 'mailto:katialuisanchez.49@gmail.com' },
+];
+
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-border mt-24">
+  <div class="container-page flex flex-col gap-4 py-10 text-sm text-text-secondary md:flex-row md:items-center md:justify-between">
+    <p>© {year} Katia — Frontend Diary.</p>
+    <ul class="flex gap-6">
+      {
+        socials.map((social) => (
+          <li>
+            <a href={social.href} class="text-text-secondary hover:text-accent no-underline" target="_blank" rel="noopener noreferrer">
+              {social.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</footer>

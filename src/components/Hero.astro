@@ -1,0 +1,38 @@
+---
+// Hero.astro
+// El brief pide abrir con lo más característico del sujeto: en vez de un
+// título+gradiente genérico, mostramos qué se está construyendo ahora
+// mismo (Frontend Diary como bitácora activa), con datos reales del
+// autor en vez de placeholder marketing.
+---
+
+<section class="grid gap-10 py-16 md:grid-cols-[1.3fr_1fr] md:items-end">
+  <div>
+    <p class="text-sm text-text-secondary">Bitácora de desarrollo Frontend</p>
+    <h1 class="mt-3 text-4xl font-bold leading-tight md:text-5xl">
+      Aprendo construyendo,<br />y documento lo que queda.
+    </h1>
+    <p class="mt-5 max-w-prose text-text-secondary">
+      Soy Katia, estudiante de la UPChiapas. Aquí escribo sobre lo que aprendo
+      mientras construyo proyectos reales — desde Funlish, mi proyecto
+      integrador, hasta experimentos por mi cuenta con Android y Kotlin,
+      que he estado practicado ultimamente.
+    </p>
+    <div class="mt-8 flex flex-wrap gap-x-8 gap-y-3 text-sm">
+      <a href="/blog" class="underline underline-offset-4 decoration-border hover:decoration-accent">
+        Leer el blog
+      </a>
+      <a href="/proyectos" class="underline underline-offset-4 decoration-border hover:decoration-accent">
+        Ver proyectos
+      </a>
+    </div>
+  </div>
+
+  <div class="border-l border-border pl-6 text-sm">
+    <p class="text-text-secondary">Ahora mismo</p>
+    <p class="mt-2 text-text-primary">
+      Construyendo Frontend Diary con Astro y Tailwind, y aprendiendo
+      Android desde cero con Kotlin y Retrofit.
+    </p>
+  </div>
+</section>
