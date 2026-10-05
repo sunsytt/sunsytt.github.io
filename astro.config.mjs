@@ -5,7 +5,7 @@ import sitemap from '@astrojs/sitemap';
 // Cambia este valor por tu dominio real antes de desplegar.
 // El sitemap y las etiquetas canonical dependen de este valor para
 // generar URLs absolutas correctas.
-const SITE_URL = 'https://frontend-diary.vercel.app';
+const SITE_URL = 'https://github.com/sunsytt/sunsytt.github.io.git';
 
 export default defineConfig({
   site: SITE_URL,
