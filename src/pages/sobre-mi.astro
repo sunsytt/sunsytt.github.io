@@ -5,7 +5,7 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 // marcadores de orden aquí (a diferencia de una sección de features).
 const timeline = [
   {
-    date: '2024',
+    date: '2025',
     title: 'Estructura de Datos',
     description: 'Prácticas con arreglos en Java partiendo de diagramas de clases UML.',
   },
@@ -22,25 +22,30 @@ const timeline = [
   },
   {
     date: '2026',
+    title: 'App de lista de tareas',
+    description:
+      'App Android para la materia de móviles hecha con Jetpack Compose y StateFlow, con arquitectura MVVM (UI y ViewModel). Organiza las tareas por categorías (Estudios, Trabajo, Personal y Hogar) en tarjetas con color según la prioridad y un botón flotante para agregar notas.',
+  },
+  {
+    date: '2026',
     title: 'Frontend Diary',
     description: 'Este sitio: Astro, Tailwind y SEO técnico, documentando lo que voy aprendiendo.',
   },
 ];
 
-const learningNow = ['Kotlin', 'Android SDK', 'Retrofit'];
+const learningNow = ['Kotlin', 'Android SDK', 'Retrofit', 'Jetpack Compose', 'StateFlow'];
 ---
 
 <BaseLayout
   title="Sobre mí"
-  description="Siyu, estudiante de la UPChiapas especializada en desarrollo Frontend, autora de Frontend Diary."
+  description="Katia, estudiante de la UPChiapas especializada en desarrollo Frontend, autora de Frontend Diary."
 >
   <h1 class="text-3xl font-bold">Sobre mí</h1>
 
   <div class="mt-6 max-w-prose text-text-secondary">
     <p>
       Soy Katia, estudiante de la Universidad Politécnica de Chiapas. Me especializo en desarrollo
-      Frontend y estoy construyendo Funlish, mi proyecto integrador: una plataforma gamificada para
-      reforzar inglés a nivel universitario, junto a un equipo de cuatro personas.
+      Frontend.
     </p>
     <p class="mt-4">
       Frontend Diary es donde documento lo que aprendo en el camino — desde el trabajo diario en
